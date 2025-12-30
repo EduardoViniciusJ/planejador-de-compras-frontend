@@ -43,4 +43,16 @@ export class AuthService {
     const supabase = this.clientService.getClient();
     await supabase.auth.signOut();
   }
+
+async getAccessToken(): Promise<string | null> {
+  const { data, error} = await this.clientService
+    .getClient()
+    .auth.getSession();
+  if(error || !data.session){
+    return null;
+  }
+  return data.session.access_token;
+}
+
+
 }

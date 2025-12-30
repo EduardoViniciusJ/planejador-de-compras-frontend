@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { LoginComponent } from "./components/login/login.component";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
