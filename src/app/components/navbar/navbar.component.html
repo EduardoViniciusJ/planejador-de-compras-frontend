@@ -11,15 +11,21 @@
 
       <div class="hidden md:flex items-center space-x-10 text-sm">
         <a routerLink="/home" routerLinkActive="text-gray-300" class="hover:text-gray-300 transition-colors">Home</a>
-        <a routerLink="/cotacoes" routerLinkActive="text-gray-300" class="hover:text-gray-300 transition-colors">Minhas Cotações</a>
-        <a routerLink="/fornecedores" routerLinkActive="text-gray-300" class="hover:text-gray-300 transition-colors">Fornecedores</a>
-        <a routerLink="/adicionar-item" routerLinkActive="text-gray-300" class="hover:text-gray-300 transition-colors">Adicionar Item</a>
+        @if (isAuthenticated()) {
+          <a routerLink="/cotacoes" routerLinkActive="text-gray-300" class="hover:text-gray-300 transition-colors">Minhas Cotações</a>
+          <a routerLink="/fornecedores" routerLinkActive="text-gray-300" class="hover:text-gray-300 transition-colors">Fornecedores</a>
+          <a routerLink="/adicionar-item" routerLinkActive="text-gray-300" class="hover:text-gray-300 transition-colors">Adicionar Item</a>
+        }
 
-        <button class="hover:text-gray-300 transition-colors flex items-center space-x-2" aria-label="Perfil/Sair">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
-        </button>
+        @if (isAuthenticated()) {
+          <button (click)="logout()" class="hover:text-gray-300 transition-colors flex items-center space-x-2" aria-label="Perfil/Sair">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </button>
+        } @else {
+          <a routerLink="/login" class="hover:text-gray-300 transition-colors">Login</a>
+        }
       </div>
 
 
@@ -42,18 +48,22 @@
       <div class="md:hidden pb-4 border-t border-gray-800 mt-2">
         <div class="flex flex-col space-y-1 pt-2">
           <a routerLink="/home" routerLinkActive="bg-gray-900 text-gray-300" (click)="closeMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-900 transition-colors">Home</a>
-          <a routerLink="/cotacoes" routerLinkActive="bg-gray-900 text-gray-300" (click)="closeMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-900 transition-colors">Minhas Cotações</a>
-          <a routerLink="/adicionar-item" routerLinkActive="bg-gray-900 text-gray-300" (click)="closeMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-900 transition-colors">Adicionar Item</a>
-          <a routerLink="/fornecedores" routerLinkActive="bg-gray-900 text-gray-300" (click)="closeMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-900 transition-colors">Fornecedores</a>
-          
-          <div class="border-t border-gray-800 my-2"></div>
+          @if (isAuthenticated()) {
+            <a routerLink="/cotacoes" routerLinkActive="bg-gray-900 text-gray-300" (click)="closeMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-900 transition-colors">Minhas Cotações</a>
+            <a routerLink="/adicionar-item" routerLinkActive="bg-gray-900 text-gray-300" (click)="closeMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-900 transition-colors">Adicionar Item</a>
+            <a routerLink="/fornecedores" routerLinkActive="bg-gray-900 text-gray-300" (click)="closeMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-900 transition-colors">Fornecedores</a>
+            
+            <div class="border-t border-gray-800 my-2"></div>
 
-          <button (click)="closeMenu()" class="w-full text-left flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-gray-900 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            <span>Perfil/Sair</span>
-          </button>
+            <button (click)="logout(); closeMenu()" class="w-full text-left flex items-center space-x-2 px-3 py-2 rounded-md hover:bg-gray-900 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              <span>Perfil/Sair</span>
+            </button>
+          } @else {
+            <a routerLink="/login" (click)="closeMenu()" class="block px-3 py-2 rounded-md hover:bg-gray-900 transition-colors">Login</a>
+          }
         </div>
       </div>
     }
